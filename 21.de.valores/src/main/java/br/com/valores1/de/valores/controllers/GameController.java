@@ -51,20 +51,23 @@ public class GameController {
             System.out.println(c);
         }
 
-        for(int i = 0; i < 4; i++) {
+        for (Jogador j:jogadores) {
+            this.separarCartas(j);
+        }
+
+        System.out.println(jogador1);
+        System.out.println(jogador2);
+    }
+
+    public void separarCartas(Jogador j) {
+        for (int i = 0; i < 2; i++) {
             Carta carta = this.pedirCarta();
-            if (i >= 2) {
-                jogador2.addCarta(carta);
-                jogador2.setCountPontosCarta(carta.getValor());
-            } else {
-                jogador1.addCarta(carta);
-                jogador1.setCountPontosCarta(carta.getValor());
-            }
+            j.addCarta(carta);
         }
     }
 
-    @GetMapping("/pedirCarta")
-    public Carta pedirCarta() {
+    @GetMapping("/pedirCartaVez")
+    public Carta pedirCartaVez() {
         Carta cart = baralho.getCarta();
 
         jogadores[vez].addCarta(cart);
@@ -77,6 +80,10 @@ public class GameController {
         }
 
         return cart;
+    }
+
+    public Carta pedirCarta() {
+        return baralho.getCarta();
     }
 
     @PostMapping("/passarAVez")

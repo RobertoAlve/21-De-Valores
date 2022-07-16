@@ -31,6 +31,7 @@ public class Jogador {
     }
 
     public void addCarta(Carta c) {
+        this.countPontosCarta += c.getValor();
         cartasIniciais.add(c);
     }
 
