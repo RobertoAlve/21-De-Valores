@@ -1,4 +1,4 @@
-package com.taurusmagister.taurusmagister.entidade;
+package br.com.valores1.de.valores.entidades;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

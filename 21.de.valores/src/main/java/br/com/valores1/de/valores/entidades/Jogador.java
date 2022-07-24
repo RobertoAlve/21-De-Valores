@@ -43,6 +43,10 @@ public class Jogador {
         this.countPontosCarta += countPontosCarta;
     }
 
+    public void zerarCountPontosCarta(Integer countPontosCarta) {
+        this.countPontosCarta = countPontosCarta;
+    }
+
     public ArrayList<Carta> getCartasIniciais() {
         return cartasIniciais;
     }

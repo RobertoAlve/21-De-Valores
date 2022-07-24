@@ -1,9 +1,8 @@
 import "./App.css";
-import { Game } from "./pages/game/game";
-import { Start } from "./pages/start/start";
+import Rotas from "./routes";
 
 function App() {
-  return <Game />;
+  return <Rotas />;
 }
 
 export default App;

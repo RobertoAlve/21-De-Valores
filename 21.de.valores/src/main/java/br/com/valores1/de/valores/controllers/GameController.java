@@ -52,6 +52,11 @@ public class GameController {
         }
 
         for (Jogador j:jogadores) {
+            j.setCartasIniciais(new ArrayList<>());
+            j.zerarCountPontosCarta(0);
+        }
+
+        for (Jogador j:jogadores) {
             this.separarCartas(j);
         }
 
@@ -67,32 +72,36 @@ public class GameController {
     }
 
     @GetMapping("/pedirCartaVez")
-    public Carta pedirCartaVez() {
+    public ResponseEntity<Carta> pedirCartaVez() {
         Carta cart = baralho.getCarta();
 
         jogadores[vez].addCarta(cart);
         jogadores[vez].setCountPontosCarta(cart.getValor());
 
-        if (jogadores[vez].getCountPontosCarta() > 21) {
-            //derrota
-        } else {
-            //vitoria
-        }
-
-        return cart;
+        return ResponseEntity.status(200).body(cart);
     }
 
     public Carta pedirCarta() {
         return baralho.getCarta();
     }
 
-    @PostMapping("/passarAVez")
+    @PostMapping("/vez")
     public void passarAVez() {
         if (vez == 1) {
             vez = 0;
         } else {
             vez = 1;
         }
+    }
+
+    @GetMapping("/vez")
+    public ResponseEntity<Integer> pegarVez() {
+        return ResponseEntity.status(200).body(vez);
+    }
+
+    @GetMapping
+    public ResponseEntity<Jogador[]> obterDadosJogadore() {
+        return ResponseEntity.status(200).body(jogadores);
     }
 
 }

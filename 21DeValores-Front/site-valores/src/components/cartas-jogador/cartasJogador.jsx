@@ -12,16 +12,12 @@ export function CartasJogador() {
   let pontosJogador2 = 0;
 
   useEffect(() => {
-    api.post("").then((res) => {
+    api.get("").then((res) => {
       if (res.status === 200) {
-        api.get("").then((res) => {
-          if (res.status === 200) {
-            setListaDeCarta1(res.data[0].cartasIniciais);
-            setListaDeCarta2(res.data[1].cartasIniciais);
-          } else {
-            console.log(res);
-          }
-        });
+        setListaDeCarta1(res.data[0].cartasIniciais);
+        setListaDeCarta2(res.data[1].cartasIniciais);
+      } else {
+        console.log(res);
       }
     });
   }, []);
