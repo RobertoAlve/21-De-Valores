@@ -36,6 +36,7 @@ public class GameController {
     public void iniciarJogo() {
         baralho = new Baralho();
         int count = 0;
+        vez = 0;
 
         for (String n:naipes) {
             for (String c:caracteres) {

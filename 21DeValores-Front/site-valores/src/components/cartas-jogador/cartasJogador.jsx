@@ -31,6 +31,8 @@ export function CartasJogador() {
       pontosJogador2 += item.valor;
     });
 
+    verificarPontos();
+
     document.querySelector("#pontosJogadorUm").innerHTML = pontosJogador1;
     document.querySelector("#pontosJogadorDois").innerHTML = pontosJogador2;
   }
@@ -38,20 +40,37 @@ export function CartasJogador() {
   function pegarVez() {
     api.get("/vez").then((res) => {
       vezJogador = res.data;
+      console.log(res.data + "aiiiii");
       verificarVez();
+      console.log(vezJogador + " Porra");
     });
   }
 
-  function pedirCarta() {
+  function pedirCartaUm() {
     api.get("/pedirCartaVez").then((res) => {
       if (res.status === 200) {
-        if (vezJogador === 0) {
-          setListaDeCarta1([...listaDeCarta1, res.data]);
-        } else if (vezJogador === 1) {
-          setListaDeCarta2([...listaDeCarta2, res.data]);
-        }
+        setListaDeCarta1([...listaDeCarta1, res.data]);
       }
     });
+  }
+
+  function pedirCartaDois() {
+    api.get("/pedirCartaVez").then((res) => {
+      if (res.status === 200) {
+        setListaDeCarta2([...listaDeCarta2, res.data]);
+      }
+    });
+  }
+
+  function verificarPontos() {
+    console.log(vezJogador + "ouuu");
+    if (pontosJogador1 > 21) {
+      alert("Jogador 1 perdeu!");
+    }
+
+    if (pontosJogador2 > 21) {
+      alert("Jogador 2 perdeu!");
+    }
   }
 
   function passarAVez() {
@@ -64,12 +83,12 @@ export function CartasJogador() {
   }
 
   function verificarVez() {
-    if (vezJogador == 0) {
+    if (vezJogador === 0) {
       document.getElementById("btn-pedir-dois").disabled = true;
       document.getElementById("btn-pedir-um").disabled = false;
       document.getElementById("btn-passar-um").disabled = false;
       document.getElementById("btn-passar-dois").disabled = true;
-    } else if (vezJogador == 1) {
+    } else if (vezJogador === 1) {
       document.getElementById("btn-pedir-um").disabled = true;
       document.getElementById("btn-passar-um").disabled = true;
       document.getElementById("btn-pedir-dois").disabled = false;
@@ -85,11 +104,11 @@ export function CartasJogador() {
   setTimeout(() => {
     pontosJogador();
     pegarVez();
-  }, 1000);
+  }, 200);
 
   return (
     <div className="container-cartas">
-      <div className="cartas-jogador-um">
+      <div className="cartas-jogador-um cartas">
         <div className="corpo-cartas">
           {listaDeCarta1.map((item) => (
             <Carta key={item.id} props={item} />
@@ -98,14 +117,14 @@ export function CartasJogador() {
         <div className="pontos-jogador">
           Pontos: <div id="pontosJogadorUm"></div>
         </div>
-        <button id="btn-pedir-um" onClick={pedirCarta}>
+        <button id="btn-pedir-um" onClick={pedirCartaUm}>
           Pedir Carta
         </button>
         <button id="btn-passar-um" onClick={passarAVez}>
           Passar a vez
         </button>
       </div>
-      <div className="cartas-jogador-um">
+      <div className="cartas-jogador-dois cartas">
         <div className="corpo-cartas">
           {listaDeCarta2.map((item) => (
             <Carta key={item.id} props={item} />
@@ -114,7 +133,7 @@ export function CartasJogador() {
         <div className="pontos-jogador">
           Pontos: <div id="pontosJogadorDois"></div>
         </div>
-        <button id="btn-pedir-dois" onClick={pedirCarta}>
+        <button id="btn-pedir-dois" onClick={pedirCartaDois}>
           Pedir Carta
         </button>
         <button id="btn-passar-dois" onClick={passarAVez}>
