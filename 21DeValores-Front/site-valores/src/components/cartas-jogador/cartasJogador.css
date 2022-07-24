@@ -1,0 +1,20 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.corpo-cartas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: auto;
+}
+
+.container-cartas {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
