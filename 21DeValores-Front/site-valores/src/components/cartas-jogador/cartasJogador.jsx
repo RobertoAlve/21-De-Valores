@@ -65,11 +65,12 @@ export function CartasJogador() {
   function verificarPontos() {
     console.log(vezJogador + "ouuu");
     if (pontosJogador1 > 21) {
-      alert("Jogador 1 perdeu!");
+      alert("Jogador 2 Ganhou!");
+      
     }
 
     if (pontosJogador2 > 21) {
-      alert("Jogador 2 perdeu!");
+      alert("Jogador 1 Ganhou");
     }
   }
 

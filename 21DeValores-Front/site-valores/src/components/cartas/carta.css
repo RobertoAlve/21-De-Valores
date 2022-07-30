@@ -6,7 +6,15 @@
 .corpo-carta {
     width: 100px;
     height: 140px;
-    background-color: #fff;
+    background-image: url("../../img/Fundo\ carta.png");
+    background-size: cover;
     border-radius: 8px;
     margin: 8px 0px 0px 8px;
+    color: whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+}
+
+.corpo-carta h1 {
+    padding-left: 11px;
 }

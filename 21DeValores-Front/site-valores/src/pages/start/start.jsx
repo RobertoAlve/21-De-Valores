@@ -16,7 +16,7 @@ export function Start() {
         <h1>21 De Valores</h1>
       </div>
       <button onClick={iniciarJogo} className="btn-jogar">
-        Jogar
+        <span>Jogar</span>
       </button>
     </div>
   );

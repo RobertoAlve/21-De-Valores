@@ -28,9 +28,53 @@ body {
     color: #fff;
 }
 
-.btn-jogar {
+/* .btn-jogar {
     cursor: pointer;
     height: 40px;
     width: 160px;
     font-size: 28px;
+    color: red;
+    background-color: black;
+    border-color: whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+} */
+
+.btn-jogar {
+    border-radius: 4px;
+    background-color: black;
+    border: 1px solid whitesmoke;
+    color: red;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    cursor: pointer;
+    margin: 5px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: oblique;
+    
 }
+
+  .btn-jogar span {
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .btn-jogar span:after {
+    content: "\2665";
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+
+  .btn-jogar:hover span {
+    padding-right: 25px;
+  }
+
+  .btn-jogar:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
