@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../../api";
+import { AlertWin } from "../AlertWin/alertWin";
 import { Carta } from "../cartas/carta";
 import "./cartasJogador.css";
 
 export function CartasJogador() {
   const [listaDeCarta1, setListaDeCarta1] = useState([]);
   const [listaDeCarta2, setListaDeCarta2] = useState([]);
+  let [vencedor, setVencedor] = useState("");
+  let [active, setActive] = useState(false);
 
   let vezJogador = 0;
   let pontosJogador1 = 0;
@@ -65,12 +68,19 @@ export function CartasJogador() {
   function verificarPontos() {
     console.log(vezJogador + "ouuu");
     if (pontosJogador1 > 21) {
-      alert("Jogador 2 Ganhou!");
-      
+      setVencedor("Jogador 2 Ganhou");
+      setActive(true);
+    } else if (pontosJogador1 === 21) {
+      setVencedor("Jogador 1 Ganhou");
+      setActive(true);
     }
 
     if (pontosJogador2 > 21) {
-      alert("Jogador 1 Ganhou");
+      setVencedor("Jogador 1 Ganhou");
+      setActive(true);
+    } else if (pontosJogador2 === 21) {
+      setVencedor("Jogador 2 Ganhou");
+      setActive(true);
     }
   }
 
@@ -141,6 +151,8 @@ export function CartasJogador() {
           Passar a vez
         </button>
       </div>
+
+      <AlertWin active={active} vencedor={vencedor} />
     </div>
   );
 }

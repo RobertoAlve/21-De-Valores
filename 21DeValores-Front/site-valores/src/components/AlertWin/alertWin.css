@@ -1,0 +1,34 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+
+.container.on {
+  height: 100vh;
+}
+
+.vencedor {
+  height: 0;
+  width: 30vw;
+  border-radius: 18px;
+  background-color: gainsboro;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+}
+
+.vencedor.on {
+  height: 40vh;
+  opacity: 1;
+}

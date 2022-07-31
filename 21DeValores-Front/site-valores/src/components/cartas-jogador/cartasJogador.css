@@ -29,32 +29,32 @@
 }
 
 #btn-pedir-um {
-  background-image: linear-gradient(45deg,grey,white,grey);
+  color: black;
+  background-image: linear-gradient(45deg, grey, white, grey);
   margin-top: 5px;
 }
 
 #btn-passar-um {
-  background-image: linear-gradient(45deg,grey,white,grey);
+  color: black;
+  background-image: linear-gradient(45deg, grey, white, grey);
   margin-top: 3px;
 }
 
 #btn-pedir-dois {
-  background-image: linear-gradient(45deg,grey,white,grey);
+  color: black;
+  background-image: linear-gradient(45deg, grey, white, grey);
   margin-top: 5px;
 }
 
 #btn-passar-dois {
-  background-image: linear-gradient(45deg,grey,white,grey);
+  color: black;
+  background-image: linear-gradient(45deg, grey, white, grey);
   margin-top: 3px;
 }
 
-.pontos-jogador  {
-  background-image: linear-gradient(45deg, red, black, red, black, red);
-  color: black;
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  /* Adicionado: */
-  -webkit-text-fill-color: transparent;
+.pontos-jogador {
+  font-size: 32px;
+  color: #fff;
   margin-top: 10px;
+  text-align: center;
 }
