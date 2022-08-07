@@ -4,10 +4,7 @@ import br.com.valores1.de.valores.entidades.Baralho;
 import br.com.valores1.de.valores.entidades.Carta;
 import br.com.valores1.de.valores.entidades.Jogador;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -84,6 +81,24 @@ public class GameController {
 
     public Carta pedirCarta() {
         return baralho.getCarta();
+    }
+
+    @GetMapping("/pontosTotais")
+    public ResponseEntity<Integer[]> getPontosTotais() {
+        Integer[] pontosTotais = new Integer[2];
+        pontosTotais[0] = jogador1.getPontosTotais();
+        pontosTotais[1] = jogador2.getPontosTotais();
+        return ResponseEntity.status(200).body(pontosTotais);
+    }
+
+    @PostMapping("/pontosTotais1")
+    public void attPontosJogador1() {
+        jogadores[0].setPontosTotais(jogadores[0].getPontosTotais() + 100);
+    }
+
+    @PostMapping("/pontosTotais2")
+    public void attPontosJogador2() {
+        jogadores[1].setPontosTotais(jogadores[1].getPontosTotais() + 100);
     }
 
     @PostMapping("/vez")

@@ -6,6 +6,7 @@ public class Jogador {
 
     private String nome;
     private Integer pontos;
+    private Integer pontosTotais = 0;
     private Integer countPontosCarta = 0;
     private ArrayList<Carta> cartasIniciais = new ArrayList<>();
 
@@ -28,6 +29,14 @@ public class Jogador {
 
     public void setPontos(Integer pontos) {
         this.pontos = pontos;
+    }
+
+    public Integer getPontosTotais() {
+        return pontosTotais;
+    }
+
+    public void setPontosTotais(Integer pontosTotais) {
+        this.pontosTotais = pontosTotais;
     }
 
     public void addCarta(Carta c) {
@@ -60,6 +69,7 @@ public class Jogador {
         return "Jogador{" +
                 "nome='" + nome + '\'' +
                 ", pontos=" + pontos +
+                ", pontosTotais=" + pontosTotais +
                 ", countPontosCarta=" + countPontosCarta +
                 ", cartasIniciais=" + cartasIniciais +
                 '}';
