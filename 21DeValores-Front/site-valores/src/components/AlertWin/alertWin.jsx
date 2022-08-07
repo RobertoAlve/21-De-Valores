@@ -7,12 +7,12 @@ export function AlertWin(props) {
 
   useEffect(() => {
     setVencedor(props.vencedor);
-    console.log(vencedor);
   }, [props.vencedor, vencedor]);
 
   function off() {
     document.querySelector(".container").classList.remove("on");
     document.querySelector(".vencedor").classList.remove("on");
+    props.f();
   }
 
   useEffect(() => {

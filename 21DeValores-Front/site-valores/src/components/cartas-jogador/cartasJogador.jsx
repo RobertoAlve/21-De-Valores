@@ -7,12 +7,21 @@ import "./cartasJogador.css";
 export function CartasJogador() {
   const [listaDeCarta1, setListaDeCarta1] = useState([]);
   const [listaDeCarta2, setListaDeCarta2] = useState([]);
+  const [pontosTotais1, setPontosTotais1] = useState(0);
+  const [pontosTotais2, setPontosTotais2] = useState(0);
   let [vencedor, setVencedor] = useState("");
   let [active, setActive] = useState(false);
 
   let vezJogador = 0;
   let pontosJogador1 = 0;
   let pontosJogador2 = 0;
+
+  function iniciarJogo() {
+    verificarPontosTotais();
+    api.post("").then((res) => {
+      document.location.reload(true);
+    });
+  }
 
   useEffect(() => {
     api.get("").then((res) => {
@@ -24,6 +33,36 @@ export function CartasJogador() {
       }
     });
   }, []);
+
+  useEffect(() => {
+    api.get("/pontosTotais").then((res) => {
+      if (res.status === 200) {
+        setPontosTotais1(res.data[0]);
+        setPontosTotais2(res.data[1]);
+      } else {
+        console.log(res);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    api.get("").then((res) => {
+      if (res.status === 200) {
+        setListaDeCarta1(res.data[0].cartasIniciais);
+        setListaDeCarta2(res.data[1].cartasIniciais);
+      } else {
+        console.log(res);
+      }
+    });
+  }, []);
+
+  function attPontosTotais1() {
+    api.post("/pontosTotais1");
+  }
+
+  function attPontosTotais2() {
+    api.post("/pontosTotais2");
+  }
 
   function pontosJogador() {
     listaDeCarta1.forEach((item) => {
@@ -37,15 +76,16 @@ export function CartasJogador() {
     verificarPontos();
 
     document.querySelector("#pontosJogadorUm").innerHTML = pontosJogador1;
+    document.querySelector("#pontosTotaisJogadorUm").innerHTML = pontosTotais1;
     document.querySelector("#pontosJogadorDois").innerHTML = pontosJogador2;
+    document.querySelector("#pontosTotaisJogadorDois").innerHTML =
+      pontosTotais2;
   }
 
   function pegarVez() {
     api.get("/vez").then((res) => {
       vezJogador = res.data;
-      console.log(res.data + "aiiiii");
       verificarVez();
-      console.log(vezJogador + " Porra");
     });
   }
 
@@ -81,6 +121,20 @@ export function CartasJogador() {
     } else if (pontosJogador2 === 21) {
       setVencedor("Jogador 2 Ganhou");
       setActive(true);
+    }
+  }
+
+  function verificarPontosTotais() {
+    if (pontosJogador1 > 21) {
+      attPontosTotais2();
+    } else if (pontosJogador1 === 21) {
+      attPontosTotais1();
+    }
+
+    if (pontosJogador2 > 21) {
+      attPontosTotais1();
+    } else if (pontosJogador2 === 21) {
+      attPontosTotais2();
     }
   }
 
@@ -127,6 +181,8 @@ export function CartasJogador() {
         </div>
         <div className="pontos-jogador">
           Pontos: <div id="pontosJogadorUm"></div>
+          <br />
+          Pontos Totais: <div id="pontosTotaisJogadorUm"></div>
         </div>
         <button id="btn-pedir-um" onClick={pedirCartaUm}>
           Pedir Carta
@@ -143,6 +199,8 @@ export function CartasJogador() {
         </div>
         <div className="pontos-jogador">
           Pontos: <div id="pontosJogadorDois"></div>
+          <br />
+          Pontos Totais: <div id="pontosTotaisJogadorDois"></div>
         </div>
         <button id="btn-pedir-dois" onClick={pedirCartaDois}>
           Pedir Carta
@@ -152,7 +210,7 @@ export function CartasJogador() {
         </button>
       </div>
 
-      <AlertWin active={active} vencedor={vencedor} />
+      <AlertWin f={iniciarJogo} active={active} vencedor={vencedor} />
     </div>
   );
 }
